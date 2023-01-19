@@ -3,6 +3,7 @@
 \usepackage{xspace}
 \usepackage{ulem}
 \usepackage{listings}
+\usepackage{hyperref}
 
 \title{Arduino Masterclass}
 \subtitle{(also general programming and stuff)}
@@ -10,9 +11,12 @@
 
 \newcommand{\cee}{\texttt{C}\xspace}
 \newcommand{\cxx}{\texttt{C++}\xspace}
+
 \newcommand{\examplefile}[1]{
 	\lstinputlisting[language=C++, basicstyle=\tiny]{examples/#1}
 }
+
+\newcommand{\link}[2]{\href{#1}{\color{blue}#2}}
 
 \usetheme{Darmstadt}
 \begin{document}
@@ -21,6 +25,7 @@
 	\end{frame}
 
 	\begin{frame}
+		note: I'm considering circuit design out of the scope of this presentation
 		\tableofcontents
 	\end{frame}
 
@@ -95,11 +100,15 @@
 	\begin{frame}[fragile]{Variables}
 		\begin{itemize}
 			\item variables denote a location in RAM in which data of a specified type can be stored
-			\item it's all just binary, but the type gives the compiler information on how that data is interpreted
+			\item it's all just binary, but the type gives the compiler information on how that data is interpreted, therefore we cannot change it's type at runtime
 			\item declared with \verb|<type> <name> = <value>;|
-			\item assigned (after declaration) with \verb|<name> = <value>;|
+			\item assigned (after declaration) with \verb|<name> = <value>;| (assignment $\neq$ equivelance)
 			\item accessed with their name
 		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Example}
+		\examplefile{variables.cxx}
 	\end{frame}
 
 	\begin{frame}[fragile]{Data Types}
@@ -114,27 +123,66 @@
 		\end{itemize}
 	\end{frame}
 
-	\begin{frame}{Operators}
-		TODO: write
+	\subsection{Operators}
+	\begin{frame}[fragile]{Arithmatic Operators}
+		take two values and computes a new value, used like \verb|<lhs> <operator> <rhs>|
+		\begin{itemize}
+			\item \verb|x|: addition
+			\item \verb|-|: subtraction
+			\item \verb|*|: multiplication
+			\item \verb|/|: division (undefined behavior if denominator is zero!)
+			\item \verb|%|: remainder of \verb|<lhs>| divided by \verb|<rhs>| (sometimes called modulo)
+		\end{itemize}
 	\end{frame}
 
-	\begin{frame}[fragile]{Example}
-		\examplefile{variables.cxx}
+	\begin{frame}[fragile]{Arithmatic Example}
+		\examplefile{arithmatic.cxx}
+	\end{frame}
+
+	\begin{frame}[fragile]{Comparison Operators}
+		takes two values and compares them to return a boolean, used like \verb|<lhs> <operator> <rhs>|
+		\begin{itemize}
+			\item \verb|==|: equality (note that assignment is one equals sign but this is two)
+			\item \verb|!=|: non-equality (the opposite of \verb|==|)
+			\item \verb|>|: greater than
+			\item \verb|>=|: greater than or equal to
+			\item \verb|<|: less than
+			\item \verb|<=|: less than or equal to
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Comparison Example}
+		\examplefile{comparison.cxx}
 	\end{frame}
 
 	\subsection{Functions}
 	\begin{frame}{Functions}
-		TODO: write
+		\begin{itemize}
+			\item functions are reusable sections of code
+			\item you ``call'' them and they ``return'' a value
+			\item saves you from copy and pasting common sections of your code
+			\item they are defined with a name, return type, and arguments
+			\item make sure the types match otherwise the compiler will be unhappy
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Example}
+		\examplefile{functions.cxx}
 	\end{frame}
 
 	\subsection{Control Flow}
-	\begin{frame}{Control Flow}
-		TODO: write
+	\begin{frame}[fragile]{Control Flow}
+		lets you alter the path your code takes
+		\begin{itemize}
+			\item \verb|if(<condition>) { ... }|: takes a boolean value, if it's true then it executes what's in the curly braces, otherwise it's ignored
+			\item \verb|else { ... }|: optional, placed after the \verb|if| statement, runs when the condition is false
+			\item \verb|while(<condition>) { ... }|: repeats the inside infinitely while the condition is true, it is checked on each iteration
+		\end{itemize}
+		there's a bunch more of these which I don't have time to explain, but these 3 are good enough for most scenarios
 	\end{frame}
 
-	\subsection{Arrays}
-	\begin{frame}{Control Flow}
-		TODO: write
+	\begin{frame}[fragile]{Example}
+		\examplefile{control\_flow.cxx}
 	\end{frame}
 
 	\section{Conclusion}
@@ -145,6 +193,9 @@
 
 	\subsection{Further Reading}
 	\begin{frame}{Additional Cool Stuff}
-		TODO: include links to Rust stuff
+		\begin{itemize}
+			\item \link{https://www.arduino.cc/reference/en/}{Arduino Language Documentation}
+			\item \link{https://www.rust-lang.org/}{Rust}
+		\end{itemize}
 	\end{frame}
 \end{document}
