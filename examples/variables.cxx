@@ -3,5 +3,5 @@ int x = 0;
 
 void setup() {
 	// reassign x as 5
-	x = 5
+	x = 5;
 }
