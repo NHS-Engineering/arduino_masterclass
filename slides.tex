@@ -1,0 +1,116 @@
+\documentclass{beamer}
+
+\usepackage{xspace}
+\usepackage{ulem}
+\usepackage{listings}
+
+\title{Arduino Masterclass}
+\subtitle{(also general programming and stuff)}
+\date{January 19, 2023}
+
+\newcommand{\cee}{\texttt{C}\xspace}
+\newcommand{\cxx}{\texttt{C++}\xspace}
+\newcommand{\examplefile}[1]{
+	\lstinputlisting[language=C++, basicstyle=\tiny]{examples/#1}
+}
+
+\usetheme{Darmstadt}
+\begin{document}
+	\begin{frame}
+		\titlepage
+		\tableofcontents
+	\end{frame}
+
+	\section{Arduino 101}
+	\subsection{The Basics}
+	\begin{frame}{What Is an Arduino?}
+		An Arduino is essentially a really small and power efficient computer with a few tradeoffs.
+
+		\begin{itemize}
+			\item an Arduino is a microcontroller (MCU $\neq$ CPU)
+			\begin{itemize}
+				\item severely restricted RAM, ROM, and EEPROM
+				\item no operating system
+				\item limited graphical capabilities
+			\end{itemize}
+			\item interfaces with electronics via pins
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{What Can I Do With an Arduino?}
+		\begin{itemize}
+			\item control electronics
+			\begin{itemize}
+				\item respond to stimuli from a sensor
+				\begin{itemize}
+					\item light
+					\item sound
+					\item temperature
+					\item GPS location
+				\end{itemize}
+
+				\item control other electronics
+				\begin{itemize}
+					\item motor
+					\item servo
+					\item solonoid
+					\item \sout{lasers} LEDs
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\section{Programming}
+	\subsection{Programming Introduction}
+	\begin{frame}{How Do I Program an Arduino?}
+		Arduinos are (typically) programmed using the Arduino IDE in the Arduino Langauge
+		\begin{itemize}
+			\item the Arduino Language is essentially \cxx without the boilerplate
+			\item \cxx is a superset of \cee
+			\item most Arduino programming is essentially \cee
+			\item most embedded systems use \cee, so most of the knowledge here will transfer to the real world
+			\item \sout{Rust is cooler}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Note on Compilers}
+		\begin{itemize}
+			\item programs are text which are passed to a compiler which translates it into machine code
+			\item what you see $\neq$ what you get
+			\item you will not saves bytes by removing blank lines
+			\item sometimes your code can be automatically optimized for speed and/or size
+			\item it will complain if you don't end statements with a semicolon
+		\end{itemize}
+	\end{frame}
+
+	\subsection{The Arduino Language}
+	\begin{frame}[fragile]{Structure of a Program}
+		\examplefile{structure.cxx}
+	\end{frame}
+
+	\begin{frame}[fragile]{Variables}
+		\begin{itemize}
+			\item variables denote a location in RAM in which data of a specified type can be stored
+			\item it's all just binary, but the type gives the compiler information on how that data is interpreted
+			\item declared with \verb|<type> <name> = <value>;|
+			\item assigned (after declaration) with \verb|<name> = <value>;|
+			\item accessed with their name
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Data Types}
+		pretty much the same as \cxx if you're familiar with that
+		\begin{itemize}
+			\item \verb|bool|: a boolean value, either \verb|true| or \verb|false|
+			\item \verb|byte|: an unsigned 8 bit integer ($0$ to $255$)
+			\item \verb|int|: an signed integer of platform defined size (in our case 16 bits, so between approximately $\pm30,000$-ish)
+			\item \verb|long|: a beeg boy signed 32 bit integer (between about $\pm2$ billion)
+			\item \verb|float|: a decimal number (ex: $1, 1.0, 1.2, -3.14$)
+			\item \verb|double|: a bigger \verb|float| of platform defined size, sometimes identical to \verb|float|
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Variables Example}
+		\examplefile{variables.cxx}
+	\end{frame}
+\end{document}
