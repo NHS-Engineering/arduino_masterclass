@@ -114,7 +114,13 @@
 	\begin{frame}[fragile]{Data Types}
 		pretty much the same as \cxx if you're familiar with that
 		\begin{itemize}
-			\item \verb|bool|: a boolean value, either \verb|true| or \verb|false|
+			\item \verb|bool|: a boolean value
+			\begin{itemize}
+				\item either \verb|true| or \verb|false|
+				\item also can be used in the context of digital signals with \verb|HIGH| and \verb|LOW|
+				\item also used in pin modes with \verb|INPUT| and \verb|OUTPUT|
+			\end{itemize}
+
 			\item \verb|byte|: an unsigned 8 bit integer ($0$ to $255$)
 			\item \verb|int|: an signed integer of platform defined size (in our case 16 bits, so between approximately $\pm30,000$-ish)
 			\item \verb|long|: a beeg boy signed 32 bit integer (between about $\pm2$ billion)
@@ -166,12 +172,22 @@
 		\end{itemize}
 	\end{frame}
 
-	\begin{frame}[fragile]{Example}
+	\begin{frame}[fragile]{Functions Example}
 		\examplefile{functions.cxx}
 	\end{frame}
 
-	\begin{frame}{Useful Builtin Functions}
-		TODO: write
+	\begin{frame}[fragile]{Useful Builtin Functions}
+		\begin{itemize}
+			\item \verb|pinMode(pin, mode)|: sets a pin to \verb|INPUT| or \verb|OUTPUT|, required before setting or reading it's value
+			\item \verb|digitalWrite(pin, value)|: sets a pin to \verb|HIGH| or \verb|LOW|
+			\item \verb|digitalRead(pin)|: reads the value of a pin (may require pull-up resistor)
+			\item \verb|delay(ms)|: delays for a certain number of milliseconds (synchronous busyloop)
+		\end{itemize}
+		there are also functions for analog control, but they're fairly trivial so I'll leave them as an exercise to the reader
+	\end{frame}
+
+	\begin{frame}[fragile]{Builtin Functions Example}
+		\examplefile{builtins.cxx}
 	\end{frame}
 
 	\subsection{Control Flow}
